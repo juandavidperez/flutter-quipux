@@ -31,12 +31,19 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   bool _isDropdownOpen = false;
+  int _selectedIndex = -1; // Inicialmente ningún elemento seleccionado
 
-  List<String> dropdownList = ['Elemento 1', 'Elemento 2', 'Elemento 3', 'Elemento 4', 'Elemento 5'];
+  List<String> dropdownList = ['Estudiantes', 'Grupos', 'Materias', 'Evaluaciones', 'Informes'];
 
   void toggleDropdown() {
     setState(() {
       _isDropdownOpen = !_isDropdownOpen;
+    });
+  }
+
+  void handleSelection(int index) {
+    setState(() {
+      _selectedIndex = index; // Actualiza el índice seleccionado
     });
   }
 
@@ -50,10 +57,22 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Stack(
         children: <Widget>[
           Container(
-            alignment: Alignment.topLeft,
-            child: IconButton(
-              icon: Icon(Icons.menu),
-              onPressed: toggleDropdown,
+            color: Colors.white, // Color de fondo blanco
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Colegio Quipux',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
+                  ),
+                  Container(
+                    width: 300, // Ancho deseado de la imagen
+                    height: 200, // Altura deseada de la imagen
+                    child: Image.asset('assets/images/quipux.png'), // Muestra la imagen debajo del texto
+                  ),
+                ],
+              ),
             ),
           ),
           if (_isDropdownOpen)
@@ -63,33 +82,38 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Container(
                 width: 200, // Ancho fijo de la lista desplegable
                 height: MediaQuery.of(context).size.height, // Altura al 100% de la pantalla
-                color: Colors.white, // Fondo blanco
+                color: Color(0xFF6A737C), // Color de fondo predeterminado
                 child: ListView(
-                  children: dropdownList.map((String value) {
-                    return ListTile(
-                      title: Text(value),
-                      onTap: () {
-                        // Aquí puedes agregar la lógica para manejar la selección de cada elemento de la lista
-                      },
+                  children: dropdownList.asMap().entries.map((entry) {
+                    int index = entry.key;
+                    String value = entry.value;
+                    return Container(
+                      color: _selectedIndex == index ? Color(0xFFC8CCD0) : Color(0xFF6A737C),
+                      child: ListTile(
+                        title: Text(
+                          value,
+                          style: TextStyle(
+                            color: _selectedIndex == index ? Color(0xFF555A5E) : Colors.white,
+                          ),
+                        ),
+                        onTap: () {
+                          handleSelection(index);
+                          // Aquí puedes agregar la lógica para manejar la selección de cada elemento de la lista
+                          setState(() {
+                            _isDropdownOpen = false;
+                          });
+                        },
+                      ),
                     );
                   }).toList(),
                 ),
               ),
             ),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Colegio Quipux',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-                Container(
-                  width: 400, // Ancho deseado de la imagen
-                  height: 200, // Altura deseada de la imagen
-                  child: Image.asset('assets/images/quipux.png'), // Muestra la imagen debajo del texto
-                ),
-              ],
+          Container(
+            alignment: Alignment.topLeft,
+            child: IconButton(
+              icon: Icon(Icons.menu),
+              onPressed: toggleDropdown,
             ),
           ),
         ],
