@@ -99,9 +99,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         onTap: () {
                           handleSelection(index);
                           // Aquí puedes agregar la lógica para manejar la selección de cada elemento de la lista
-                          setState(() {
-                            _isDropdownOpen = false;
-                          });
                         },
                       ),
                     );
