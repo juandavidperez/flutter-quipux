@@ -31,7 +31,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   bool _isDropdownOpen = false;
-  int _selectedIndex = -1; // Inicialmente ningún elemento seleccionado
+  int _selectedIndex = 2; // Inicialmente seleccionado materias
 
   List<String> dropdownList = ['Estudiantes', 'Grupos', 'Materias', 'Evaluaciones', 'Informes'];
 
