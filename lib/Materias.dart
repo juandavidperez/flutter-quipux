@@ -29,7 +29,7 @@ class _MateriasState extends State<Materias> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Nueva Pantalla'),
+        title: Text('Materias'),
       ),
       body: Stack(
         children: <Widget>[
@@ -39,41 +39,122 @@ class _MateriasState extends State<Materias> {
               children: [
                 //un rectangulo blanco  cuya altura es 50 con un texto
                 Container(
-                  height: 50,
-                  width: MediaQuery.of(context).size.width,
-                  color: Colors.white,
-                  child: Center(
-                    child: 
-                    
-                    DropdownButton(
-                      value: _selectedIndex2 == -1 ? null : dropdownList2[_selectedIndex2],
-                      icon: Icon(Icons.arrow_drop_down),
-                      iconSize: 24,
-                      elevation: 16,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 18,
-                      ),
-                      underline: Container(
-                        height: 2,
-                        color: Colors.black,
-                      ),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          _selectedIndex2 = dropdownList2.indexOf(newValue!);
-                        });
-                      },
-                      items: dropdownList2.map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                ),
-                
-                
+  height: 80,
+  width: MediaQuery.of(context).size.width-100,
+  margin: EdgeInsets.only(left: 25, right: 25, bottom: 20, top: 20),
+  color: Colors.white,
+  child: Center(
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        // DropdownButton con texto arriba
+        Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Text('Grado'),
+            ),
+            DropdownButton(
+              value: _selectedIndex2 == -1 ? null : dropdownList2[_selectedIndex2],
+              icon: Icon(Icons.arrow_drop_down),
+              iconSize: 24,
+              elevation: 16,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 18,
+              ),
+              underline: Container(
+                height: 2,
+                color: Colors.black,
+              ),
+              onChanged: (String? newValue) {
+                setState(() {
+                  _selectedIndex2 = dropdownList2.indexOf(newValue!);
+                });
+              },
+              items: dropdownList2.map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+          ],
+        ),
+
+        // DropdownButton con texto arriba
+        Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Text('Grupo'),
+            ),
+            DropdownButton(
+              value: _selectedIndex2 == -1 ? null : dropdownList2[_selectedIndex2],
+              icon: Icon(Icons.arrow_drop_down),
+              iconSize: 24,
+              elevation: 16,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 18,
+              ),
+              underline: Container(
+                height: 2,
+                color: Colors.black,
+              ),
+              onChanged: (String? newValue) {
+                setState(() {
+                  _selectedIndex2 = dropdownList2.indexOf(newValue!);
+                });
+              },
+              items: dropdownList2.map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+          ],
+        ),
+
+        // DropdownButton con texto arriba
+        Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Text('Materia'),
+            ),
+            DropdownButton(
+              value: _selectedIndex2 == -1 ? null : dropdownList2[_selectedIndex2],
+              icon: Icon(Icons.arrow_drop_down),
+              iconSize: 24,
+              elevation: 16,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 18,
+              ),
+              underline: Container(
+                height: 2,
+                color: Colors.black,
+              ),
+              onChanged: (String? newValue) {
+                setState(() {
+                  _selectedIndex2 = dropdownList2.indexOf(newValue!);
+                });
+              },
+              items: dropdownList2.map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+          ],
+        ),
+      ],
+    ),
+  ),
+),
                 // Aquí va el código de la tabla que deseas mostrar
                 Expanded(
                 child: SingleChildScrollView(
@@ -109,6 +190,13 @@ class _MateriasState extends State<Materias> {
                       ),
                       // Aquí va el código de la tabla que deseas mostrar
                       Table(
+                        columnWidths: {
+    0: FlexColumnWidth(1.0), // Columna 1
+    1: FlexColumnWidth(2.0), // Columna 2
+    2: FlexColumnWidth(3.0), // Columna 3
+    3: FlexColumnWidth(2.0), // Columna 4
+    4: FlexColumnWidth(1.0), // Columna 5
+  },
                         border: TableBorder.all(color: Colors.white),
                         defaultVerticalAlignment: TableCellVerticalAlignment.middle,
                         children: [
