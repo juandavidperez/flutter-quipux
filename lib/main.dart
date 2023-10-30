@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'NuevaPantalla.dart';
+import 'Materias.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void _navigateToNuevaPantalla(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => NuevaPantalla()),
+      MaterialPageRoute(builder: (context) => Materias()),
     );
   }
 
