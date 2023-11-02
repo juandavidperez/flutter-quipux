@@ -13,17 +13,18 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
+        primarySwatch: Colors.indigo,
       ),
-      home: const MyHomePage(title: 'Colegio Quipux'),
+      home: const MyHomePage(title: 'Colegio Quipux', nombre: 'Juan David Perez Vergara'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({Key? key, required this.title, required this.nombre}) : super(key: key);
 
   final String title;
+  final String nombre;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -43,8 +44,14 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.deepPurple,
-        title: Text(widget.title),
+        backgroundColor: Colors.indigo,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(widget.title),
+            Text(widget.nombre),
+          ],
+        ),
       ),
       body: Container(
         color: Colors.white,
