@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'Materia.dart';
 
-class Materias extends StatefulWidget {
+class Materia extends StatefulWidget {
   @override
-  _MateriasState createState() => _MateriasState();
+  _MateriaState createState() => _MateriaState();
 }
 
-class _MateriasState extends State<Materias> {
+class _MateriaState extends State<Materia> {
   List<String> dropdownList = ['Estudiantes', 'Grupos', 'Materias', 'Evaluaciones', 'Informes'];
   List<String> dropdownList2 = ['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5'];
   int _selectedIndex = 2; // Inicialmente seleccionado materias
@@ -26,13 +25,6 @@ class _MateriasState extends State<Materias> {
     });
   }
 
-  void _navigateToNuevaPantalla(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => Materia()),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,6 +39,38 @@ class _MateriasState extends State<Materias> {
               children: [
                 //un rectangulo blanco  cuya altura es 50 con un texto
                 Container(
+                  height: 50,
+                  width: MediaQuery.of(context).size.width,
+                  child: Center(
+                    child: Row(
+  children: [
+    Padding(
+  padding: EdgeInsets.only(left: 50.0), // Ajusta el margen izquierdo según tus necesidades
+  child: Text(
+    'Administración de materias /',
+    style: TextStyle(
+      fontSize: 18,
+      fontFamily: 'Montserrat',
+      fontWeight: FontWeight.w400,
+      color: Colors.blue,
+    ),
+  ),
+),
+    Text(
+      ' Materia',
+      style: TextStyle(
+        fontSize: 18,
+        fontFamily: 'Montserrat',
+        fontWeight: FontWeight.w400,
+        color: Colors.black,
+      ),
+    ),
+  ],
+)
+
+                  ),
+                ),
+                Container(
   height: 80,
   width: MediaQuery.of(context).size.width-100,
   margin: EdgeInsets.only(left: 25, right: 25, bottom: 20, top: 20),
@@ -55,12 +79,13 @@ class _MateriasState extends State<Materias> {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
+
         // DropdownButton con texto arriba
         Column(
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 10),
-              child: Text('Grado'),
+              child: Text('Materia'),
             ),
             DropdownButton(
               value: _selectedIndex2 == -1 ? null : dropdownList2[_selectedIndex2],
@@ -95,7 +120,7 @@ class _MateriasState extends State<Materias> {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 10),
-              child: Text('Grupo'),
+              child: Text('Profesor'),
             ),
             DropdownButton(
               value: _selectedIndex2 == -1 ? null : dropdownList2[_selectedIndex2],
@@ -123,7 +148,85 @@ class _MateriasState extends State<Materias> {
               }).toList(),
             ),
           ],
-        ),
+        ), 
+
+        // DropdownButton con texto arriba
+        Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Text('Grado(s)'),
+            ),
+            DropdownButton(
+              value: _selectedIndex2 == -1 ? null : dropdownList2[_selectedIndex2],
+              icon: Icon(Icons.arrow_drop_down),
+              iconSize: 24,
+              elevation: 16,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 18,
+              ),
+              underline: Container(
+                height: 2,
+                color: Colors.black,
+              ),
+              onChanged: (String? newValue) {
+                setState(() {
+                  _selectedIndex2 = dropdownList2.indexOf(newValue!);
+                });
+              },
+              items: dropdownList2.map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+          ],
+        ), 
+
+      ],
+    ),
+  ),
+),
+                // Aquí va el código de la tabla que deseas mostrar
+                Expanded(
+                child: SingleChildScrollView(
+                  child:
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height - 200,
+                  margin: EdgeInsets.only(left: 25, right: 25, bottom: 70),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        spreadRadius: 5,
+                        blurRadius: 5,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 25, bottom: 20, top: 20),
+                        child: Text(
+                          'Estudiantes',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w400,
+                            color: Colors.blue,
+                          ),
+                        ),
+                      ),
+                      
+                      Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
 
         // DropdownButton con texto arriba
         Column(
@@ -220,51 +323,17 @@ class _MateriasState extends State<Materias> {
             ),
           ),
         ),
+
       ],
     ),
-  ),
-),
-                // Aquí va el código de la tabla que deseas mostrar
-                Expanded(
-                child: SingleChildScrollView(
-                  child:
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height - 200,
-                  margin: EdgeInsets.only(left: 25, right: 25, bottom: 70),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.2),
-                        spreadRadius: 5,
-                        blurRadius: 5,
-                        offset: Offset(0, 3),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 25, bottom: 20, top: 20),
-                        child: Text(
-                          'Resultados',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
+                      
                       // Aquí va el código de la tabla que deseas mostrar
                       Table(
                         columnWidths: {
                         0: FlexColumnWidth(1.0), // Columna 1
                         1: FlexColumnWidth(2.0), // Columna 2
-                        2: FlexColumnWidth(3.0), // Columna 3
-                        3: FlexColumnWidth(2.0), // Columna 4
-                        4: FlexColumnWidth(1.0), // Columna 5
+                        2: FlexColumnWidth(1.0), // Columna 3
+                        3: FlexColumnWidth(1.0), // Columna 4
                         },
                         border: TableBorder.all(color: Colors.white),
                         defaultVerticalAlignment: TableCellVerticalAlignment.middle,
@@ -290,19 +359,7 @@ class _MateriasState extends State<Materias> {
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Text(
-                        'Materia',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  TableCell(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Text(
-                        'Profesor',
+                        'Estudiante',
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -326,7 +383,7 @@ class _MateriasState extends State<Materias> {
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Text(
-                        'Acciones',
+                        'Grupo',
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -342,71 +399,25 @@ class _MateriasState extends State<Materias> {
                   TableCell(
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text('SOC001'),
+                      child: Text('2022101'),
                     ),
                   ),
                   TableCell(
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text('Geografía'),
+                      child: Text('Camila Fernández Rojas'),
                     ),
                   ),
                   TableCell(
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text('Fabio León Restrepo'),
+                      child: Text('10'),
                     ),
                   ),
                   TableCell(
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text('6, 7, 8, 9, 10, 11'),
-                    ),
-                  ),
-                  TableCell(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            icon: SvgPicture.asset('assets/images/ic-show.svg', 
-                            semanticsLabel: 'Show',),
-                            onPressed: () {
-                              _navigateToNuevaPantalla(context);
-                            },
-                          ),
-                          IconButton(
-  icon: SvgPicture.asset('assets/images/ic-trash.svg', semanticsLabel: 'Trash'),
-  onPressed: () {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: Colors.white, // Ajusta la opacidad del color de fondo
-          content: Text("¿Estás seguro de que deseas eliminar la materia?"), // Puedes personalizar el contenido del modal
-          actions: <Widget>[
-            TextButton(
-              child: Text('Sí'),
-              onPressed: () {
-                // Lógica para eliminar el elemento
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: Text('No'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  },
-),
-                        ],
-                      ),
+                      child: Text('A'),
                     ),
                   ),
                 ],
@@ -417,71 +428,25 @@ class _MateriasState extends State<Materias> {
                   TableCell(
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text('SOC002'),
+                      child: Text('2022102'),
                     ),
                   ),
                   TableCell(
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text('Historia'),
+                      child: Text('Juan Felipe Montoya Ríos'),
                     ),
                   ),
                   TableCell(
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text('Jaime Alberto Giraldo'),
+                      child: Text('9'),
                     ),
                   ),
                   TableCell(
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text('6, 7, 8'),
-                    ),
-                  ),
-                  TableCell(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            icon: SvgPicture.asset('assets/images/ic-show.svg',
-                            semanticsLabel: 'Show',),
-                            onPressed: () {
-                              // Perform action
-                            },
-                          ),
-                          IconButton(
-  icon: SvgPicture.asset('assets/images/ic-trash.svg', semanticsLabel: 'Trash'),
-  onPressed: () {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: Colors.white, // Ajusta la opacidad del color de fondo
-          content: Text("¿Estás seguro de que deseas eliminar la materia?"), // Puedes personalizar el contenido del modal
-          actions: <Widget>[
-            TextButton(
-              child: Text('Sí'),
-              onPressed: () {
-                // Lógica para eliminar el elemento
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: Text('No'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  },
-),
-                        ],
-                      ),
+                      child: Text('C'),
                     ),
                   ),
                 ],
@@ -492,71 +457,25 @@ class _MateriasState extends State<Materias> {
                   TableCell(
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text('SOC003'),
+                      child: Text('2022103'),
                     ),
                   ),
                   TableCell(
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text('Filosofia'),
+                      child: Text('Luisa María Cruz Hernández'),
                     ),
                   ),
                   TableCell(
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text('Adriana María Zuluaga'),
+                      child: Text('9'),
                     ),
                   ),
                   TableCell(
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text('9, 10, 11'),
-                    ),
-                  ),
-                  TableCell(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            icon: SvgPicture.asset('assets/images/ic-show.svg',
-                            semanticsLabel: 'Show',),
-                            onPressed: () {
-                              // Perform action
-                            },
-                          ),
-                          IconButton(
-  icon: SvgPicture.asset('assets/images/ic-trash.svg', semanticsLabel: 'Trash'),
-  onPressed: () {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: Colors.white, // Ajusta la opacidad del color de fondo
-          content: Text("¿Estás seguro de que deseas eliminar la materia?"), // Puedes personalizar el contenido del modal
-          actions: <Widget>[
-            TextButton(
-              child: Text('Sí'),
-              onPressed: () {
-                // Lógica para eliminar el elemento
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: Text('No'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  },
-),
-                        ],
-                      ),
+                      child: Text('B'),
                     ),
                   ),
                 ],
@@ -567,71 +486,25 @@ class _MateriasState extends State<Materias> {
                   TableCell(
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text('IDM001'),
+                      child: Text('2022104'),
                     ),
                   ),
                   TableCell(
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text('Español'),
+                      child: Text('Ana María Bedoya López'),
                     ),
                   ),
                   TableCell(
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text('Fabiola Ramírez'),
+                      child: Text('8'),
                     ),
                   ),
                   TableCell(
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text('6, 7, 8, 9, 10, 11'),
-                    ),
-                  ),
-                  TableCell(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            icon: SvgPicture.asset('assets/images/ic-show.svg',
-                            semanticsLabel: 'Show',),
-                            onPressed: () {
-                              // Perform action
-                            },
-                          ),
-                          IconButton(
-  icon: SvgPicture.asset('assets/images/ic-trash.svg', semanticsLabel: 'Trash'),
-  onPressed: () {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: Colors.white, // Ajusta la opacidad del color de fondo
-          content: Text("¿Estás seguro de que deseas eliminar la materia?"), // Puedes personalizar el contenido del modal
-          actions: <Widget>[
-            TextButton(
-              child: Text('Sí'),
-              onPressed: () {
-                // Lógica para eliminar el elemento
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: Text('No'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  },
-),
-                        ],
-                      ),
+                      child: Text('B'),
                     ),
                   ),
                 ],
@@ -642,71 +515,25 @@ class _MateriasState extends State<Materias> {
                   TableCell(
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text('IDM003'),
+                      child: Text('2022105'),
                     ),
                   ),
                   TableCell(
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text('Inglés'),
+                      child: Text('Santiago Sánchez Rivera'),
                     ),
                   ),
                   TableCell(
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text('María Dolores Smicth'),
+                      child: Text('7'),
                     ),
                   ),
                   TableCell(
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text('6, 7, 8, 9, 10, 11'),
-                    ),
-                  ),
-                  TableCell(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            icon: SvgPicture.asset('assets/images/ic-show.svg',
-                            semanticsLabel: 'Show',),
-                            onPressed: () {
-                              // Perform action
-                            },
-                          ),
-                          IconButton(
-  icon: SvgPicture.asset('assets/images/ic-trash.svg', semanticsLabel: 'Trash'),
-  onPressed: () {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: Colors.white, // Ajusta la opacidad del color de fondo
-          content: Text("¿Estás seguro de que deseas eliminar la materia?"), // Puedes personalizar el contenido del modal
-          actions: <Widget>[
-            TextButton(
-              child: Text('Sí'),
-              onPressed: () {
-                // Lógica para eliminar el elemento
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: Text('No'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  },
-),
-                        ],
-                      ),
+                      child: Text('A'),
                     ),
                   ),
                 ],
