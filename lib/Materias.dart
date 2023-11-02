@@ -151,6 +151,67 @@ class _MateriasState extends State<Materias> {
             ),
           ],
         ),
+
+        // DropdownButton con texto arriba
+        Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Text('Profesor'),
+            ),
+            DropdownButton(
+              value: _selectedIndex2 == -1 ? null : dropdownList2[_selectedIndex2],
+              icon: Icon(Icons.arrow_drop_down),
+              iconSize: 24,
+              elevation: 16,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 18,
+              ),
+              underline: Container(
+                height: 2,
+                color: Colors.black,
+              ),
+              onChanged: (String? newValue) {
+                setState(() {
+                  _selectedIndex2 = dropdownList2.indexOf(newValue!);
+                });
+              },
+              items: dropdownList2.map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+          ],
+        ), 
+
+        ElevatedButton(
+          onPressed: () {
+          // Aquí colocas la lógica que quieres ejecutar al presionar el botón
+          },
+          style: ElevatedButton.styleFrom(
+            primary: Colors.blue, // Color de fondo del botón
+            onPrimary: Colors.white, // Color del texto del botón
+            textStyle: TextStyle(fontSize: 16), // Estilo del texto del botón
+            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15), // Ajuste el padding según tus preferencias
+          ),
+          child: Text('Buscar'),
+        ),
+
+        GestureDetector(
+          onTap: () {
+          // Agrega la lógica que deseas ejecutar al tocar el enlace
+          },
+          child: Text(
+          'Limpiar filtros',
+          style: TextStyle(
+            color: Colors.blue, // Color del texto del enlace
+            decoration: TextDecoration.underline, // Añade subrayado al texto del enlace
+            ),
+          ),
+        ),
       ],
     ),
   ),
@@ -191,12 +252,12 @@ class _MateriasState extends State<Materias> {
                       // Aquí va el código de la tabla que deseas mostrar
                       Table(
                         columnWidths: {
-    0: FlexColumnWidth(1.0), // Columna 1
-    1: FlexColumnWidth(2.0), // Columna 2
-    2: FlexColumnWidth(3.0), // Columna 3
-    3: FlexColumnWidth(2.0), // Columna 4
-    4: FlexColumnWidth(1.0), // Columna 5
-  },
+                        0: FlexColumnWidth(1.0), // Columna 1
+                        1: FlexColumnWidth(2.0), // Columna 2
+                        2: FlexColumnWidth(3.0), // Columna 3
+                        3: FlexColumnWidth(2.0), // Columna 4
+                        4: FlexColumnWidth(1.0), // Columna 5
+                        },
                         border: TableBorder.all(color: Colors.white),
                         defaultVerticalAlignment: TableCellVerticalAlignment.middle,
                         children: [
